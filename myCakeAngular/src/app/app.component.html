@@ -1,0 +1,62 @@
+<div class="root">
+  <h2>{{ title }}</h2>
+
+  <div class="block-left">
+    <h4>Submit a cake to be rated</h4>
+    <hr>
+    <form (submit)="onSubmit()">
+      <!-- use the json pipe to see how newTask changes in real time -->
+      <!-- <p> {{ newTask | json }} </p> -->
+      <div>
+        <p class="lbl">Baker Name</p>
+        <input type="text" name="newCake.name"  [(ngModel)]="newCake.name">
+      </div>
+      <div>
+        <p class="lbl">Image Url</p>
+        <input type="text" name="newCake.image_url"  [(ngModel)]="newCake.image_url"  >
+      </div>
+      <input type="submit" value="SUBMIT" >
+    </form>
+  </div>
+
+  <div class="block-right">
+    <!-- {{cakeList | json}} -->
+    <div *ngFor="let c of cakeList">
+      <img (click)="onClickCake(c._id, c.name, c.image_url, c.rating, c.comment)" src={{c.image_url}} alt="a cake" height="200" width="300"  style="display: inline-block; margin-right:10px;">
+      <div style="display: inline-block; vertical-align: top;">
+        <form (submit)="onComment(c.rating, c.comment, c._id)">
+          <select style="display: inline-block; vertical-align: top; width: 100px; height: 30px;" name="c.rating" [(ngModel)]="c.rating" >
+              <option value="5">5 Stars</option>
+              <option value="4">4 Stars</option>
+              <option value="3">3 Stars</option>
+              <option value="2">2 Stars</option>
+              <option value="1">1 Stars</option>
+          </select>
+          <textarea style="display: inline-block; " name="c.comment" [(ngModel)]="c.comment" rows="4" cols="25" placeholder="Type your comment here..."></textarea>
+          <br>
+          <input type="submit" value="Rate" >
+        </form>
+      </div>
+      <hr>
+    </div>
+      <!-- https://i.imgur.com/JOcFy7z.jpg -->
+      <!-- <img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2009/3/25/0/PB0210-1_Strawberry-Cake_s4x3.jpg.rend.hgtvcom.616.462.suffix/1371589412891.jpeg" alt="a cake" height="200" width="300"> -->
+      <!-- <img src="https://www.mrbrownbakery.com/media/catalog/product/cache/1/image/645x500/9df78eab33525d08d6e5fb8d27136e95/f/o/forever-n-a-day-more-cake-half-kg_1.jpg" alt="a cake" height="200" width="300"> -->
+  </div>
+
+  <!-- <div>
+    <div *ngIf="oneCake">
+      <h1>{{oneCake.name}}</h1>
+      <img src= {{oneCake.image_url}} alt="a cake" height="200" width="300" style="display: inline-block; margin-right:10px;">
+      <div style="display: inline-block; vertical-align: top;">
+        <p>Average Rating #</p>
+        <p>Comment #</p>
+        <p>Stars {{oneCake.rating}}</p>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Nested component to show the details of a particular cake -->
+  <app-cake *ngIf="oneCake" [cakeToShow]="oneCake"></app-cake> 
+
+</div>

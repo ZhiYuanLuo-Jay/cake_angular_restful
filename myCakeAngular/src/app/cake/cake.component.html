@@ -1,0 +1,14 @@
+<div class="root">
+  <div>
+      <div *ngIf="cakeToShow">
+        <h1>{{cakeToShow.name}}</h1>
+        <img src= {{cakeToShow.image_url}} alt="a cake" height="200" width="300" style="display: inline-block; margin-right:10px;">
+        <div style="display: inline-block; vertical-align: top;">
+          <p>Average Rating {{cakeToShow.rating}}</p>
+          <p># {{cakeToShow.comment}}</p>
+          <p>Stars {{cakeToShow.rating}}</p>
+        </div>
+      </div>
+  </div>
+
+</div>
